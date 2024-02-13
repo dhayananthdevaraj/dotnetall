@@ -9,7 +9,7 @@ namespace dotnetapp.Models
 
         public DbSet<User> Users { get; set; }
        
-        public DBSet<Recipe> Recipes { get; set;}
+        public DbSet<Recipe> Recipes { get; set;}
       
     }
 }
