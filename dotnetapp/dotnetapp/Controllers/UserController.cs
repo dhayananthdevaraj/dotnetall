@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Authorization;  // Add this using directive for [Auth
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private const string HardcodedJwtSecretKey = "your_hardcoded_secret_key"; // Replace with your actual secret key
 
     private readonly ApplicationDbContext _context;
 

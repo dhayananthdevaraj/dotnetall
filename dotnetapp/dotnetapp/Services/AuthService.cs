@@ -8,7 +8,7 @@ namespace dotnetapp.Services
 {
     public class AuthService
     {
-        private const string HardcodedJwtSecretKey = "your_hardcoded_secret_key"; // Replace with your actual secret key
+        private const string HardcodedJwtSecretKey = "asdfghjkl"; // Replace with your actual secret key
 
         public static string GenerateToken(int userId)
         {
