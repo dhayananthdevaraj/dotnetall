@@ -106,10 +106,10 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet("user/{userId}")]
-    public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipesByUserId(int userId, [FromQuery] string searchValue = "")
+    public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipesByUserId(int userId, [FromQuery] string searchTerm = "")
     {
         var recipes = await _context.Recipes
-            .Where(recipe => recipe.UserId == userId && recipe.RecipeName.Contains(searchValue)) // Apply search filter
+            .Where(recipe => recipe.UserId == userId && recipe.RecipeName.Contains(searchTerm)) // Apply search filter
             .ToListAsync();
 
         return Ok(recipes);
