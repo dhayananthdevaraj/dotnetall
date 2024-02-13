@@ -18,10 +18,10 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Recipe>>> GetAllRecipes([FromQuery] int sortValue = 1, [FromQuery] string searchValue = "")
+    public async Task<ActionResult<IEnumerable<Recipe>>> GetAllRecipes([FromQuery] int sortValue = 1, [FromQuery] string searchTerm = "")
     {
         var recipes = await _context.Recipes
-            .Where(recipe => recipe.RecipeName.Contains(searchValue)) // Apply search filter
+            .Where(recipe => recipe.RecipeName.Contains(searchTerm)) // Apply search filter
             .OrderBy(recipe => recipe.Price * sortValue) // Sort based on Price and sortValue
             .ToListAsync();
 
