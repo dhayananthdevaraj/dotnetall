@@ -29,7 +29,7 @@ app.UseCors();
 
 // jwt auth 
 
-// app.UseMiddleware<JwtMiddleware>();
+app.UseMiddleware<JwtMiddleware>();
 
 
 if (app.Environment.IsDevelopment())
