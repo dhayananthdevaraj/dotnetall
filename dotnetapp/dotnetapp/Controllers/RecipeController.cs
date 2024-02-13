@@ -18,12 +18,24 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Recipe>>> GetAllRecipes([FromQuery] int sortValue = 1, [FromQuery] string searchTerm = "")
+    public async Task<ActionResult<IEnumerable<Recipe>>> GetAllRecipes([FromQuery] int? sortValue = 1, [FromQuery] string? searchTerm = "")
     {
-        var recipes = await _context.Recipes
-            .Where(recipe => recipe.RecipeName.Contains(searchTerm)) // Apply search filter
-            .OrderBy(recipe => recipe.Price * sortValue) // Sort based on Price and sortValue
-            .ToListAsync();
+        var recipes = await _context.Recipes.ToListAsync(); // Retrieve all recipes from the database
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            var searchRegex = new System.Text.RegularExpressions.Regex(searchTerm, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            recipes = recipes.Where(recipe => searchRegex.IsMatch(recipe.RecipeName)).ToList(); // Apply search filter
+        }
+
+        if (sortValue == -1)
+        {
+            recipes = recipes.OrderByDescending(recipe => recipe.Price).ToList(); // Sort in descending order
+        }
+        else
+        {
+            recipes = recipes.OrderBy(recipe => recipe.Price).ToList(); // Sort in ascending order (default)
+        }
 
         return Ok(recipes);
     }
@@ -31,8 +43,7 @@ public class RecipeController : ControllerBase
     [HttpGet("{recipeId}")]
     public async Task<ActionResult<Recipe>> GetRecipeById(int recipeId)
     {
-        var recipe = await _context.Recipes
-            .FirstOrDefaultAsync(recipe => recipe.RecipeId == recipeId);
+        var recipe = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.RecipeId == recipeId);
 
         if (recipe == null)
         {
@@ -106,11 +117,17 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet("user/{userId}")]
-    public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipesByUserId(int userId, [FromQuery] string searchTerm = "")
+    public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipesByUserId(int userId, [FromQuery] string? searchTerm = null)
     {
-        var recipes = await _context.Recipes
-            .Where(recipe => recipe.UserId == userId && recipe.RecipeName.Contains(searchTerm)) // Apply search filter
-            .ToListAsync();
+        var recipes = await _context.Recipes.ToListAsync();
+
+        recipes = recipes.Where(recipe => recipe.UserId == userId).ToList();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            var searchRegex = new System.Text.RegularExpressions.Regex(searchTerm, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            recipes = recipes.Where(recipe => searchRegex.IsMatch(recipe.RecipeName)).ToList();
+        }
 
         return Ok(recipes);
     }
