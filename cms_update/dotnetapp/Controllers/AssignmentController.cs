@@ -23,7 +23,7 @@ namespace dotnetapp.Controllers
 
 
        // [Authorize(Roles = "Admin")]
-        [Authorize]
+        // [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignments()
         {
@@ -38,7 +38,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpGet("{assignmentId}")]
         public async Task<ActionResult<Assignment>> GetAssignmentById(long assignmentId)
         {
@@ -60,7 +60,7 @@ namespace dotnetapp.Controllers
         }
 
    
-        [Authorize]
+        // [Authorize]
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByUserId(long userId)
         {
@@ -75,22 +75,22 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddAssignment([FromBody] Assignment newAssignment)
         {
             try
-            {
-                var addedAssignment = await _assignmentService.AddAssignment(newAssignment);
-                return CreatedAtAction(nameof(GetAssignmentById), new { assignmentId = addedAssignment.AssignmentId }, addedAssignment);
-            }
+                {
+                    var addedAssignment = await _assignmentService.AddAssignment(newAssignment);
+                    return CreatedAtAction(nameof(GetAssignmentById), new { assignmentId = addedAssignment.AssignmentId }, new { message = "Assignment added successfully", assignment = addedAssignment });
+                }
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = ex.Message });
             }
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpPut("{assignmentId}")]
         public async Task<ActionResult> UpdateAssignment(long assignmentId, [FromBody] Assignment updatedAssignment)
         {
@@ -109,7 +109,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpDelete("{assignmentId}")]
         public async Task<ActionResult> DeleteAssignment(long assignmentId)
         {

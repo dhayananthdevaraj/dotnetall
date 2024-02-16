@@ -21,7 +21,7 @@ namespace dotnetapp.Controllers
             _containerService = containerService;
         }
 
-        // [Authorize]
+       [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Container>>> GetAllContainers()
         {
@@ -37,30 +37,14 @@ namespace dotnetapp.Controllers
         }
  
  
-        // // [Authorize]
-        // [HttpPost]
-        // public async Task<ActionResult> AddContainer([FromBody] Container container)
-        // {
-        //     try
-        //     {
-        //         var addedContainer = await _containerService.AddContainer(container);
-        //         return StatusCode(201, addedContainer);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, new { message = ex.Message });
-        //     }
-        // }
-
-
-                
+            [Authorize]                
             [HttpPost]
             public async Task<ActionResult> AddContainer([FromBody] Container container)
             {
                 try
                 {
-                    await _containerService.AddContainer(container);
-                    return StatusCode(201, new { message = "Container added successfully" });
+                      var addedContainer = await _containerService.AddContainer(container);
+                      return StatusCode(201, new { message = "Container added successfully", container = addedContainer });
                 }
                 catch (Exception ex)
                 {
@@ -90,7 +74,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+       [Authorize]
         [HttpDelete("{containerId}")]
         public async Task<ActionResult> DeleteContainer(long containerId)
         {
