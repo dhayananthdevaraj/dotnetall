@@ -49,6 +49,7 @@ namespace dotnetapp.Services
         }
 
         public async Task<(int, string)> Login(LoginModel model)
+        
         {
             var user = await userManager.FindByEmailAsync(model.Email);
             Console.WriteLine(string.Join(", ", user));
@@ -65,7 +66,7 @@ namespace dotnetapp.Services
             {
                new Claim(ClaimTypes.Name, user.UserName),
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
+               new Claim(ClaimTypes.NameIdentifier, user.Id),
             };
 
             foreach (var userRole in userRoles)
