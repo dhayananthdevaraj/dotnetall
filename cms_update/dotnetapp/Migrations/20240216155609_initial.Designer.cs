@@ -12,7 +12,7 @@ using dotnetapp.Data;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240216114350_initial")]
+    [Migration("20240216155609_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,6 +147,20 @@ namespace dotnetapp.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastInspectionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Owner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -154,6 +168,9 @@ namespace dotnetapp.Migrations
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
 
                     b.HasKey("ContainerId");
 
@@ -174,6 +191,9 @@ namespace dotnetapp.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReportedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Severity")
                         .IsRequired()

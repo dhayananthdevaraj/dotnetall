@@ -10,6 +10,11 @@ namespace dotnetapp.Models
         public string Type { get; set; }
         public string Status { get; set; }
         public int Capacity { get; set; }  
+        public string Location { get; set; } 
+        public double Weight { get; set; } 
+        public string Owner { get; set; } 
+        public DateTime CreationDate { get; set; }
+        public DateTime LastInspectionDate { get; set; } 
 
         [JsonIgnore]
          public Assignment? Assignment { get; set; }

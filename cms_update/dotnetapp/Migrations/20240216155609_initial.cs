@@ -57,7 +57,12 @@ namespace dotnetapp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Capacity = table.Column<int>(type: "int", nullable: false)
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    Owner = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastInspectionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,6 +230,7 @@ namespace dotnetapp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Severity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReportedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     AssignmentId = table.Column<long>(type: "bigint", nullable: false)
                 },
