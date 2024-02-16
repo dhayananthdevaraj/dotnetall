@@ -6,64 +6,47 @@ using Microsoft.EntityFrameworkCore;
 namespace dotnetapp.Data;
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-    }
+     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    public DbSet<User> Users { get; set; }
-    public DbSet<Review> Reviews { get; set; }
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Customer> Customers{ get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderItem> OrderItems { get; set; }
-    //public DbSet<Booking> Bookings { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Container> Containers { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Issue> Issues { get; set; }
 
+ protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configure relationships
+            modelBuilder.Entity<User>() 
+                .HasMany(u => u.Assignments)
+                .WithOne(a => a.User)
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // Define the relationship between Order and OrderItem
-        //modelBuilder.Entity<Order>()
-        //    .HasMany(o => o.OrderItems)
-        //    .WithOne(oi => oi.Order)
-        //    .HasForeignKey(oi => oi.OrderID);
-        modelBuilder.Entity<Order>()
-        .HasOne(o => o.Customer)
-        .WithMany(c => c.Orders)
-        .HasForeignKey(o => o.CustomerID)
-        .IsRequired();
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Issues)
+                .WithOne(i => i.User)
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-        // Define the relationship between Product and OrderItem
-        modelBuilder.Entity<Product>()
-            .HasMany(p => p.Orders)
-            .WithMany(o => o.Products)
-            .UsingEntity<OrderItem>(
-                j => j
-                    .HasOne(oi => oi.Order)
-                    .WithMany()
-                    .HasForeignKey(oi => oi.OrderID),
-                j => j
-                    .HasOne(oi => oi.Product)
-                    .WithMany()
-                    .HasForeignKey(oi => oi.ProductID),
-                j =>
-                {
-                    j.Property(oi => oi.Quantity);
-                    // Additional properties if needed
-                });
+            modelBuilder.Entity<Container>()
+                .HasOne(c => c.Assignment)
+                .WithOne(a => a.Container)
+                .HasForeignKey<Assignment>(a => a.ContainerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-        //modelBuilder.Entity<Booking>()
-        //        .HasOne(b => b.Product)
-        //        .WithMany(p => p.Bookings)
-        //        .HasForeignKey(b => b.ProductID);
+            // modelBuilder.Entity<Assignment>()
+            //     .HasMany(a => a.Issues)
+            //     .WithOne(i => i.Assignment)
+            //     .HasForeignKey(i => i.AssignmentId)
+            //     .OnDelete(DeleteBehavior.Cascade);
 
-        //    modelBuilder.Entity<Booking>()
-        //        .HasOne(b => b.Customer)
-        //        .WithMany(c => c.Bookings)
-        //        .HasForeignKey(b => b.CustomerID);
-        // Additional configurations for your entities...
+            modelBuilder.Entity<Issue>()
+                .HasOne(i => i.Assignment)
+                .WithMany()
+                .HasForeignKey(i => i.AssignmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+            // Add other configurations as needed
 
-        base.OnModelCreating(modelBuilder);
-    }
-
-
+            base.OnModelCreating(modelBuilder);
+        }
 }

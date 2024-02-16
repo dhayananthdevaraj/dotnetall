@@ -1,0 +1,66 @@
+// ContainerService.cs
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using dotnetapp.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace dotnetapp.Services
+{
+    public interface IContainerService
+    {
+        Task<IEnumerable<Container>> GetAllContainers();
+        Task<Container> AddContainer(Container container);
+        Task<bool> UpdateContainer(long containerId, Container container);
+        Task<bool> DeleteContainer(long containerId);
+    }
+
+    public class ContainerService : IContainerService
+    {
+        private readonly ApplicationDbContext _context;
+
+        public ContainerService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Container>> GetAllContainers()
+        {
+            return await _context.Containers.ToListAsync();
+        }
+
+        public async Task<Container> AddContainer(Container container)
+        {
+            _context.Containers.Add(container);
+            await _context.SaveChangesAsync();
+            return container;
+        }
+
+        public async Task<bool> UpdateContainer(long containerId, Container container)
+        {
+            var existingContainer = await _context.Containers.FirstOrDefaultAsync(c => c.ContainerId == containerId);
+
+            if (existingContainer == null)
+                return false;
+
+            existingContainer.Type = container.Type;
+            existingContainer.Status = container.Status;
+            existingContainer.Capacity = container.Capacity;
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteContainer(long containerId)
+        {
+            var container = await _context.Containers.FirstOrDefaultAsync(c => c.ContainerId == containerId);
+
+            if (container == null)
+                return false;
+
+            _context.Containers.Remove(container);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+    }
+}
