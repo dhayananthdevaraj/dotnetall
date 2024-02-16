@@ -20,6 +20,9 @@ namespace dotnetapp.Controllers
             _assignmentService = assignmentService;
         }
 
+
+       // [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignments()
         {
@@ -34,6 +37,7 @@ namespace dotnetapp.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{assignmentId}")]
         public async Task<ActionResult<Assignment>> GetAssignmentById(long assignmentId)
         {
@@ -54,6 +58,8 @@ namespace dotnetapp.Controllers
             }
         }
 
+   
+        [Authorize]
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByUserId(long userId)
         {
@@ -68,6 +74,7 @@ namespace dotnetapp.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddAssignment([FromBody] Assignment newAssignment)
         {
@@ -82,6 +89,7 @@ namespace dotnetapp.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("{assignmentId}")]
         public async Task<ActionResult> UpdateAssignment(long assignmentId, [FromBody] Assignment updatedAssignment)
         {
@@ -100,6 +108,7 @@ namespace dotnetapp.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{assignmentId}")]
         public async Task<ActionResult> DeleteAssignment(long assignmentId)
         {
