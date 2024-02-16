@@ -23,15 +23,15 @@ namespace dotnetapp.Controllers
         }
 
         // POST: api/Issue
-        [Authorize]
+        // [Authorize]
         [HttpPost]
         public async Task<ActionResult> ReportIssue([FromBody] Issue newIssue)
         {
-            try
-            {
-                var reportedIssue = await _issueService.ReportIssue(newIssue);
-                return CreatedAtAction(nameof(ReportIssue), new { id = reportedIssue.IssueId }, reportedIssue);
-            }
+           try
+                {
+                    var reportedIssue = await _issueService.ReportIssue(newIssue);
+                    return CreatedAtAction(nameof(ReportIssue), new { id = reportedIssue.IssueId }, new { message = "Issue reported successfully", issue = reportedIssue });
+                }
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = ex.Message });
@@ -39,7 +39,7 @@ namespace dotnetapp.Controllers
         }
 
         // GET: api/Issues
-        [Authorize]
+        // [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Issue>>> ViewAllReportedIssues()
         {
