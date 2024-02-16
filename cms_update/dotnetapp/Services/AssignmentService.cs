@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using dotnetapp.Models;
 using Microsoft.EntityFrameworkCore;
+using dotnetapp.Data;
 
 namespace dotnetapp.Services
 {

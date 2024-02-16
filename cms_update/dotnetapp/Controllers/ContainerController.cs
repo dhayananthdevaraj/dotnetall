@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
 {

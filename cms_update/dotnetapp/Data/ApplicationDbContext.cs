@@ -8,7 +8,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
      public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Container> Containers { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Issue> Issues { get; set; }
