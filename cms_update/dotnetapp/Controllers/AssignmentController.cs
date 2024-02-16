@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
-
-
+using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
 {
@@ -14,9 +13,9 @@ namespace dotnetapp.Controllers
     [ApiController]
     public class AssignmentController : ControllerBase
     {
-        private readonly IAssignmentService _assignmentService;
+        private readonly AssignmentService _assignmentService;
 
-        public AssignmentController(IAssignmentService assignmentService)
+        public AssignmentController(AssignmentService assignmentService)
         {
             _assignmentService = assignmentService;
         }
@@ -89,8 +88,9 @@ namespace dotnetapp.Controllers
             try
             {
                 var success = await _assignmentService.UpdateAssignment(assignmentId, updatedAssignment);
+
                 if (success)
-                    return Ok(updatedAssignment);
+                    return Ok(new { message = "Assignment updated successfully" });
                 else
                     return NotFound(new { message = "Cannot find the assignment" });
             }
@@ -106,6 +106,7 @@ namespace dotnetapp.Controllers
             try
             {
                 var success = await _assignmentService.DeleteAssignment(assignmentId);
+
                 if (success)
                     return Ok(new { message = "Assignment deleted successfully" });
                 else

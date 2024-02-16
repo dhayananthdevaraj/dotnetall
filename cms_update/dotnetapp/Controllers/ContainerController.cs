@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnetapp.Models;
-using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Services;
+using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
@@ -54,6 +54,7 @@ namespace dotnetapp.Controllers
             try
             {
                 var success = await _containerService.UpdateContainer(containerId, container);
+
                 if (success)
                     return Ok(new { message = "Container updated successfully" });
                 else
@@ -71,6 +72,7 @@ namespace dotnetapp.Controllers
             try
             {
                 var success = await _containerService.DeleteContainer(containerId);
+
                 if (success)
                     return Ok(new { message = "Container deleted successfully" });
                 else

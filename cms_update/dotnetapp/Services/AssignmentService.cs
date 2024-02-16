@@ -1,6 +1,6 @@
+// AssignmentService.cs
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using dotnetapp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,17 +8,7 @@ using dotnetapp.Data;
 
 namespace dotnetapp.Services
 {
-    public interface IAssignmentService
-    {
-        Task<IEnumerable<Assignment>> GetAllAssignments();
-        Task<Assignment> GetAssignmentById(long assignmentId);
-        Task<IEnumerable<Assignment>> GetAssignmentsByUserId(long userId);
-        Task<Assignment> AddAssignment(Assignment newAssignment);
-        Task<bool> UpdateAssignment(long assignmentId, Assignment updatedAssignment);
-        Task<bool> DeleteAssignment(long assignmentId);
-    }
-
-    public class AssignmentService : IAssignmentService
+    public class AssignmentService
     {
         private readonly ApplicationDbContext _context;
 

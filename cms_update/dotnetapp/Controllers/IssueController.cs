@@ -1,53 +1,37 @@
-// IssueController.cs
+// IssueService.cs
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnetapp.Models;
-using dotnetapp.Services;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using dotnetapp.Data;
 
-namespace dotnetapp.Controllers
+namespace dotnetapp.Services
 {
-    [Route("api/issue")]
-    [ApiController]
-    public class IssueController : ControllerBase
+    public class IssueService
     {
-        private readonly IIssueService _issueService;
+        private readonly ApplicationDbContext _context;
 
-        public IssueController(IIssueService issueService)
+        public IssueService(ApplicationDbContext context)
         {
-            _issueService = issueService;
+            _context = context;
         }
 
-        // POST: api/Issue
-        [HttpPost]
-        public async Task<ActionResult> ReportIssue([FromBody] Issue newIssue)
+        public async Task<IList<Issue>> GetAllIssues()
         {
-            try
-            {
-                var addedIssue = await _issueService.ReportIssue(newIssue);
-                return CreatedAtAction(nameof(ReportIssue), new { id = addedIssue.IssueId }, addedIssue);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = ex.Message });
-            }
+            return await _context.Issues
+                .AsNoTracking()
+                .Include(i => i.User)
+                .Include(i => i.Assignment)
+                    .ThenInclude(a => a.Container)
+                .ToListAsync();
         }
 
-        // GET: api/Issues
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Issue>>> ViewAllReportedIssues()
+        public async Task<Issue> ReportIssue(Issue newIssue)
         {
-            try
-            {
-                var issues = await _issueService.ViewAllReportedIssues();
-                return Ok(issues);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = ex.Message });
-            }
+            _context.Issues.Add(newIssue);
+            await _context.SaveChangesAsync();
+            return newIssue;
         }
     }
 }
