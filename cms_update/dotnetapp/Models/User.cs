@@ -1,5 +1,6 @@
-﻿using dotnetapp.Services;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 namespace dotnetapp.Models
 {
     public class User
@@ -11,8 +12,11 @@ namespace dotnetapp.Models
         public string MobileNumber { get; set; }
         public string UserRole { get; set; }
 
-        // Navigation Property: User can have multiple reviews
-        //public List<Review> Reviews { get; set; }
+        [JsonIgnore]
+        public List<Assignment>? Assignments { get; set; }
+
+        [JsonIgnore]
+        public List<Issue>? Issues { get; set; }
 
     }
 }

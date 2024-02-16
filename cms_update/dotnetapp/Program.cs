@@ -21,6 +21,13 @@ builder.Services.AddControllers()
 
 });
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.IgnoreNullValues = true;
+    });
+
+    
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
 
 // For Identity  
@@ -29,9 +36,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 // Adding Authentication  
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ReviewService>();
-builder.Services.AddScoped<ProductService>();
-builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<AssignmentService>();
+builder.Services.AddScoped<ContainerService>();
+builder.Services.AddScoped<IssueService>();
 
 builder.Services.AddAuthentication(options =>
 {
