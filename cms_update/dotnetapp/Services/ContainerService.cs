@@ -8,15 +8,7 @@ using dotnetapp.Data;
 
 namespace dotnetapp.Services
 {
-    public interface IContainerService
-    {
-        Task<IEnumerable<Container>> GetAllContainers();
-        Task<Container> AddContainer(Container container);
-        Task<bool> UpdateContainer(long containerId, Container container);
-        Task<bool> DeleteContainer(long containerId);
-    }
-
-    public class ContainerService : IContainerService
+    public class ContainerService
     {
         private readonly ApplicationDbContext _context;
 

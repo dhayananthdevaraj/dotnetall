@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnetapp.Models;
-using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Services;
 using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
@@ -13,9 +13,9 @@ namespace dotnetapp.Controllers
     [ApiController]
     public class ContainerController : ControllerBase
     {
-        private readonly IContainerService _containerService;
+        private readonly ContainerService _containerService;
 
-        public ContainerController(IContainerService containerService)
+        public ContainerController(ContainerService containerService)
         {
             _containerService = containerService;
         }
