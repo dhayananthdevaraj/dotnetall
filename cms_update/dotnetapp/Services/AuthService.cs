@@ -49,9 +49,10 @@ namespace dotnetapp.Services
         }
 
         public async Task<(int, string)> Login(LoginModel model)
-        
         {
-            var user = await userManager.FindByEmailAsync(model.Email);
+
+           
+         var user = await userManager.FindByEmailAsync(model.Email);
             Console.WriteLine(string.Join(", ", user));
 
             if (user == null)
