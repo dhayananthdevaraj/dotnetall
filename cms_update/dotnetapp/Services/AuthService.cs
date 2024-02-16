@@ -36,10 +36,10 @@ namespace dotnetapp.Services
             if (!createUserResult.Succeeded)
                 return (0, "User creation failed! Please check user details and try again.");
 
-            //if (!await roleManager.RoleExistsAsync(role))
-            //    await roleManager.CreateAsync(new IdentityRole(role));
-            if (!await roleManager.RoleExistsAsync(UserRoles.User))
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            if (!await roleManager.RoleExistsAsync(role))
+               await roleManager.CreateAsync(new IdentityRole(role));
+            // if (!await roleManager.RoleExistsAsync(UserRoles.User))
+            //     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
 
             if (await roleManager.RoleExistsAsync(UserRoles.User))
