@@ -2,7 +2,7 @@
 using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
-
+ 
 namespace dotnetapp.Controllers
 {
     [Route("api")]
@@ -12,15 +12,15 @@ namespace dotnetapp.Controllers
         private readonly IAuthService _authService;
         private readonly ILogger<AuthenticationController> _logger;
         private readonly ApplicationDbContext _context;
-
+ 
         public AuthenticationController(IAuthService authService, ILogger<AuthenticationController> logger, ApplicationDbContext context)
         {
             _authService = authService;
             _logger = logger;
             _context = context;
         }
-
-
+ 
+ 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginModel model)
@@ -40,16 +40,17 @@ namespace dotnetapp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-
+ 
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register(RegistrationModel model)
         {
             try
             {
-
+ 
                 if (!ModelState.IsValid)
                     return BadRequest(new { Status = "Error", Message = "Invalid Payload" });
+                    Console.WriteLine("model",model);
                 if (model.UserRole == "Admin" || model.UserRole == "InventoryManager")
                 {
                     var (status, message) = await _authService.Registeration(model, model.UserRole);
@@ -74,7 +75,7 @@ namespace dotnetapp.Controllers
                 {
                     return BadRequest(new { Status = "Error", Message = "Invalid user role" });
                 }
-
+ 
             }
             catch (Exception ex)
             {
@@ -84,3 +85,4 @@ namespace dotnetapp.Controllers
         }
     }
 }
+ 
