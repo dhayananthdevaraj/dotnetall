@@ -14,10 +14,11 @@ namespace dotnetapp.Models{
     public string Shipment { get; set; }
     public string Destination { get; set; }
     
+    
+    public Issue? Issue { get; set; }
  
     public Container? Container { get; set; }
 
-   
     public User? User { get; set; }
 
 }

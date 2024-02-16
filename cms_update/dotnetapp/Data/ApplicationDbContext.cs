@@ -43,10 +43,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
             modelBuilder.Entity<Issue>()
                 .HasOne(i => i.Assignment)
-                .WithMany()
-                .HasForeignKey(i => i.AssignmentId)
+                .WithOne(i => i.Issue) 
+                .HasForeignKey<Issue>(i => i.AssignmentId)
                 .OnDelete(DeleteBehavior.Cascade);
-            // Add other configurations as needed
 
             base.OnModelCreating(modelBuilder);
         }

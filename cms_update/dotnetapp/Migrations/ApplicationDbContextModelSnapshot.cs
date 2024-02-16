@@ -182,7 +182,8 @@ namespace dotnetapp.Migrations
 
                     b.HasKey("IssueId");
 
-                    b.HasIndex("AssignmentId");
+                    b.HasIndex("AssignmentId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -377,8 +378,8 @@ namespace dotnetapp.Migrations
             modelBuilder.Entity("dotnetapp.Models.Issue", b =>
                 {
                     b.HasOne("dotnetapp.Models.Assignment", "Assignment")
-                        .WithMany()
-                        .HasForeignKey("AssignmentId")
+                        .WithOne("Issue")
+                        .HasForeignKey("dotnetapp.Models.Issue", "AssignmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -442,6 +443,11 @@ namespace dotnetapp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetapp.Models.Assignment", b =>
+                {
+                    b.Navigation("Issue");
                 });
 
             modelBuilder.Entity("dotnetapp.Models.Container", b =>

@@ -297,7 +297,8 @@ namespace dotnetapp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Issues_AssignmentId",
                 table: "Issues",
-                column: "AssignmentId");
+                column: "AssignmentId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Issues_UserId",
