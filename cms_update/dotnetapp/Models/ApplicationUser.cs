@@ -8,6 +8,5 @@ public class ApplicationUser : IdentityUser
     [MaxLength(30)]
     public string? Name { get; set; }
 
-    public long UserId { get; set; }
 
 }
