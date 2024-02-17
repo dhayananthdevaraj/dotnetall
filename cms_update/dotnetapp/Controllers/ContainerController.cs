@@ -21,7 +21,7 @@ namespace dotnetapp.Controllers
             _containerService = containerService;
         }
 
-       [Authorize]
+       [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Container>>> GetAllContainers()
         {
@@ -37,7 +37,7 @@ namespace dotnetapp.Controllers
         }
  
  
-        [Authorize]                
+        [Authorize(Roles = "Admin")]                
         [HttpPost]
             public async Task<ActionResult> AddContainer([FromBody] Container container)
             {
@@ -55,7 +55,7 @@ namespace dotnetapp.Controllers
         
 
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{containerId}")]
         public async Task<ActionResult> UpdateContainer(long containerId, [FromBody] Container container)
         {
@@ -74,7 +74,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{containerId}")]
         public async Task<ActionResult> DeleteContainer(long containerId)
         {

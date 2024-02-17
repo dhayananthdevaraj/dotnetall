@@ -23,7 +23,7 @@ namespace dotnetapp.Controllers
 
 
        // [Authorize(Roles = "Admin")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignments()
         {
@@ -60,7 +60,7 @@ namespace dotnetapp.Controllers
         }
 
    
-        [Authorize]
+        [Authorize(Roles = "Operator")]
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByUserId(long userId)
         {
@@ -75,7 +75,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> AddAssignment([FromBody] Assignment newAssignment)
         {
@@ -109,7 +109,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{assignmentId}")]
         public async Task<ActionResult> DeleteAssignment(long assignmentId)
         {
