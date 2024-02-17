@@ -82,6 +82,7 @@ namespace dotnetapp.Services
         private string GenerateToken(IEnumerable<Claim> claims)
         {
             Console.WriteLine(claims);
+            Console.WriteLine("Claims: " + string.Join(", ", claims.Select(c => $"{c.Type}={c.Value}")));
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -94,6 +95,7 @@ namespace dotnetapp.Services
             };
 
             Console.WriteLine(tokenDescriptor);
+            Console.WriteLine("Token Descriptor: " + tokenDescriptor);
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
