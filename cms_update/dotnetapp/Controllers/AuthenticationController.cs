@@ -84,6 +84,22 @@ namespace dotnetapp.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("users")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                var users = _context.Users.ToList();
+                return Ok(new { Users = users });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
  
