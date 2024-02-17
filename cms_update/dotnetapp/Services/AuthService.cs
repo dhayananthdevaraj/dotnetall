@@ -52,7 +52,7 @@ namespace dotnetapp.Services
         {
 
            
-         var user = await userManager.FindByEmailAsync(model.Email);
+           var user = await userManager.FindByEmailAsync(model.Email);
             Console.WriteLine(string.Join(", ", user));
 
             if (user == null)
