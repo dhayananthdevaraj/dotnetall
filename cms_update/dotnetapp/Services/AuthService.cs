@@ -68,7 +68,7 @@ namespace dotnetapp.Services
                new Claim(ClaimTypes.Name, user.UserName),
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim("userId", user.Id.ToString()), 
+               new Claim("userId", user.UserId.ToString()),
             };
 
             foreach (var userRole in userRoles)
