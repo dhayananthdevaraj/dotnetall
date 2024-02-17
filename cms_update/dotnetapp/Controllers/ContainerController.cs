@@ -37,8 +37,8 @@ namespace dotnetapp.Controllers
         }
  
  
-            [Authorize]                
-            [HttpPost]
+        [Authorize]                
+        [HttpPost]
             public async Task<ActionResult> AddContainer([FromBody] Container container)
             {
                 try
@@ -74,7 +74,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-       [Authorize]
+        [Authorize]
         [HttpDelete("{containerId}")]
         public async Task<ActionResult> DeleteContainer(long containerId)
         {

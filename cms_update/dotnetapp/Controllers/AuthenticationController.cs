@@ -1,6 +1,7 @@
 ﻿using dotnetapp.Data;
 using dotnetapp.Models;
 using dotnetapp.Services;
+using Microsoft.AspNetCore.Authorization;
 
 using Microsoft.AspNetCore.Mvc;
  
@@ -85,6 +86,8 @@ namespace dotnetapp.Controllers
             }
         }
 
+
+        [Authorize]
         [HttpGet]
         [Route("users")]
         public IActionResult GetAllUsers()

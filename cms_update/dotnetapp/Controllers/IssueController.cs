@@ -23,7 +23,7 @@ namespace dotnetapp.Controllers
         }
 
         // POST: api/Issue
-        // [Authorize]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> ReportIssue([FromBody] Issue newIssue)
         {
@@ -39,7 +39,7 @@ namespace dotnetapp.Controllers
         }
 
         // GET: api/Issues
-        // [Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Issue>>> ViewAllReportedIssues()
         {
