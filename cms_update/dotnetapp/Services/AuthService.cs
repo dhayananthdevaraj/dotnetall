@@ -61,7 +61,6 @@ namespace dotnetapp.Services
                 return (0, "Invalid password");
 
             var userRoles = await userManager.GetRolesAsync(user);
-            Console.WriteLine("hssyy");
             Console.WriteLine(string.Join(", ", userRoles));
 
             var authClaims = new List<Claim>
