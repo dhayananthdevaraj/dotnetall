@@ -40,10 +40,10 @@ namespace dotnetapp.Services
                await roleManager.CreateAsync(new IdentityRole(role));
             // if (!await roleManager.RoleExistsAsync(UserRoles.User))
             //     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+              await userManager.AddToRoleAsync(user, role);            
 
-
-            if (await roleManager.RoleExistsAsync(UserRoles.User))
-                await userManager.AddToRoleAsync(user, role);
+            // if (await roleManager.RoleExistsAsync(UserRoles.User))
+            //     await userManager.AddToRoleAsync(user, role);
 
             return (1, "User created successfully!");
         }
