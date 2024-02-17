@@ -61,6 +61,7 @@ namespace dotnetapp.Services
                 return (0, "Invalid password");
 
             var userRoles = await userManager.GetRolesAsync(user);
+            Console.WriteLine("hssyy");
             Console.WriteLine(string.Join(", ", userRoles));
 
             var authClaims = new List<Claim>
@@ -74,8 +75,6 @@ namespace dotnetapp.Services
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, userRole));
             }
-
-            Console.WriteLine("Claims before token creation: " + string.Join(", ", authClaims.Select(c => $"{c.Type}={c.Value}")));
 
             string token = GenerateToken(authClaims);
             return (1, token);
