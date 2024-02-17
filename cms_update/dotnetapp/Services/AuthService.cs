@@ -74,6 +74,9 @@ namespace dotnetapp.Services
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, userRole));
             }
+
+            Console.WriteLine("Claims before token creation: " + string.Join(", ", authClaims.Select(c => $"{c.Type}={c.Value}")));
+
             string token = GenerateToken(authClaims);
             return (1, token);
         }
@@ -84,6 +87,7 @@ namespace dotnetapp.Services
             Console.WriteLine(claims);
             Console.WriteLine("Claims: " + string.Join(", ", claims.Select(c => $"{c.Type}={c.Value}")));
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+            
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -100,6 +104,7 @@ namespace dotnetapp.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
 
+            Console.WriteLine("Generated Token: " + token);
 
             return tokenHandler.WriteToken(token);
         }
