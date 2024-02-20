@@ -23,7 +23,7 @@ namespace dotnetapp.Controllers
         }
 
         // POST: api/Issue
-        [Authorize(Roles = "Operator")]
+        // [Authorize(Roles = "Operator")]
         [HttpPost]
         public async Task<ActionResult> ReportIssue([FromBody] Issue newIssue)
         {
