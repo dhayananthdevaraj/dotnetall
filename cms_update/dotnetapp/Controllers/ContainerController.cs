@@ -92,5 +92,25 @@ namespace dotnetapp.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("{containerId}")]
+        public async Task<ActionResult<Container>> GetContainerById(long containerId)
+        {
+            try
+            {
+                var container = await _containerService.GetContainerById(containerId);
+
+                if (container != null)
+                    return Ok(container);
+                else
+                    return NotFound(new { message = "Container not found" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
     }
 }

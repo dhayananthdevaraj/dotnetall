@@ -55,5 +55,10 @@ namespace dotnetapp.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+           public async Task<Container> GetContainerById(long containerId)
+{
+    return await Task.FromResult(_context.Containers.FirstOrDefault(c => c.ContainerId == containerId));
+}
     }
 }
