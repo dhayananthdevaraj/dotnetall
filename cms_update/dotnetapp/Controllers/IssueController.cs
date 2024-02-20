@@ -39,7 +39,7 @@ namespace dotnetapp.Controllers
         }
 
         // GET: api/Issues
-        [Authorize]
+        // [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Issue>>> ViewAllReportedIssues()
         {
