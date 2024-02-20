@@ -14,7 +14,6 @@ namespace dotnetapp.Models
         public double Weight { get; set; } 
         public string Owner { get; set; } 
         public DateTime CreationDate { get; set; }
-        public DateTime LastInspectionDate { get; set; } 
 
         [JsonIgnore]
          public Assignment? Assignment { get; set; }
