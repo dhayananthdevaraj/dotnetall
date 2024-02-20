@@ -75,7 +75,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> AddAssignment([FromBody] Assignment newAssignment)
         {
