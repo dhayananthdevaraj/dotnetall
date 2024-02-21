@@ -90,7 +90,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpPut("{assignmentId}")]
         public async Task<ActionResult> UpdateAssignment(long assignmentId, [FromBody] Assignment updatedAssignment)
         {
