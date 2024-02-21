@@ -60,7 +60,7 @@ namespace dotnetapp.Controllers
         }
 
    
-        [Authorize(Roles = "Operator")]
+        // [Authorize(Rol   es = "Operator")]
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByUserId(long userId)
         {
