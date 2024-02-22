@@ -40,6 +40,7 @@ namespace dotnetapp.Services
             existingContainer.Status = container.Status;
             existingContainer.Capacity = container.Capacity;
             existingContainer.Weight = container.Weight;
+            existingContainer.Owner = container.Owner;
 
             await _context.SaveChangesAsync();
             return true;
