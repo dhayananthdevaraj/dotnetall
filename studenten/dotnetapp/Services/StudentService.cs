@@ -16,6 +16,14 @@ namespace dotnetapp.Services
             _context = context;
         }
 
+        public async Task<Student> GetStudentByUserId(long userID)
+        {
+            return await _context.Students
+                .Include(s => s.User)
+                .FirstOrDefaultAsync(s => s.UserId == userID);
+        }
+
+
         public async Task<IEnumerable<Student>> GetAllStudents()
         {
             return await _context.Students

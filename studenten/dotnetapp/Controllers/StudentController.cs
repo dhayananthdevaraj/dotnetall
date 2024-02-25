@@ -52,6 +52,26 @@ namespace dotnetapp.Controllers
             }
         }
 
+         [HttpGet("UserID/{userID}")]
+    public async Task<ActionResult<Student>> GetStudentByUserId(long userID)
+    {
+        try
+        {
+            var student = await _studentService.GetStudentByUserId(userID);
+
+            if (student == null)
+            {
+                return NotFound(new { message = "Student not found" });
+            }
+
+            return Ok(student);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+
         [HttpPost]
         public async Task<ActionResult<Student>> AddStudent([FromBody] Student newStudent)
         {
