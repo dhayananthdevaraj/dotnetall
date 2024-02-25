@@ -32,12 +32,21 @@ namespace dotnetapp.Services
                 .FirstOrDefaultAsync(a => a.AdmissionID == id);
         }
 
-        public async Task<Admission> AddAdmission(Admission newAdmission)
-        {
-            _context.Admissions.Add(newAdmission);
-            await _context.SaveChangesAsync();
-            return newAdmission;
-        }
+      public async Task<Admission> AddAdmission(Admission newAdmission)
+{
+    // Check if admission already exists
+    if (await _context.Admissions.AnyAsync(a => a.StudentId == newAdmission.StudentId && a.CourseID == newAdmission.CourseID))
+    {
+        // Admission already exists, handle accordingly
+        throw new InvalidOperationException("Admission with the same StudentId and CourseID already exists.");
+    }
+
+    // Add the new admission
+    _context.Admissions.Add(newAdmission);
+    await _context.SaveChangesAsync();
+
+    return newAdmission;
+}
 
         public async Task<bool> UpdateAdmission(int id, Admission updatedAdmission)
         {
