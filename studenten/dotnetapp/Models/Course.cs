@@ -14,7 +14,7 @@ namespace dotnetapp.Models
 
         
 
-        [JsonIgnore]
+      
         public ICollection<Student>? Students { get; set; }
 
         [JsonIgnore]
