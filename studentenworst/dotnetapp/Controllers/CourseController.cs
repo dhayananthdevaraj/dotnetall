@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetapp.Controllers
 {
-    [Route("api/course")]
+    // [Route("api/course")]
     [ApiController]
     public class CourseController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace dotnetapp.Controllers
             _courseService = courseService;
         }
 
-        [HttpGet]
+        [HttpGet("api/course")]
         public async Task<ActionResult<IEnumerable<Course>>> GetAllCourses()
         {
             try
@@ -41,7 +41,7 @@ namespace dotnetapp.Controllers
 
 
 
-        [HttpGet("{courseId}")]
+        [HttpGet("api/course/{courseId}")]
         public async Task<ActionResult<Course>> GetCourseById(int courseId)
         {
             try
@@ -62,7 +62,7 @@ namespace dotnetapp.Controllers
         }
 
         // [Authorize(Roles = "Admin")]
-        [HttpPost]
+        [HttpPost("api/course")]
         public async Task<ActionResult> AddCourse([FromBody] Course newCourse)
         {
             try
