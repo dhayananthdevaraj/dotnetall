@@ -12,7 +12,7 @@ using dotnetapp.Data;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240225083457_initial")]
+    [Migration("20240225084058_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -505,13 +505,13 @@ namespace dotnetapp.Migrations
                     b.HasOne("dotnetapp.Models.Admission", "Admission")
                         .WithMany("Payments")
                         .HasForeignKey("AdmissionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("dotnetapp.Models.Course", "Course")
                         .WithMany("Payments")
                         .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("dotnetapp.Models.Student", "Student")

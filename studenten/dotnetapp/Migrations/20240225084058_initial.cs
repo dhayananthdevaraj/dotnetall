@@ -317,14 +317,12 @@ namespace dotnetapp.Migrations
                         name: "FK_Payments_Admissions_AdmissionID",
                         column: x => x.AdmissionID,
                         principalTable: "Admissions",
-                        principalColumn: "AdmissionID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AdmissionID");
                     table.ForeignKey(
                         name: "FK_Payments_Courses_CourseID",
                         column: x => x.CourseID,
                         principalTable: "Courses",
-                        principalColumn: "CourseID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CourseID");
                     table.ForeignKey(
                         name: "FK_Payments_Students_StudentId",
                         column: x => x.StudentId,

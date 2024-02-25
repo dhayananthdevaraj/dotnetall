@@ -503,13 +503,13 @@ namespace dotnetapp.Migrations
                     b.HasOne("dotnetapp.Models.Admission", "Admission")
                         .WithMany("Payments")
                         .HasForeignKey("AdmissionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("dotnetapp.Models.Course", "Course")
                         .WithMany("Payments")
                         .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("dotnetapp.Models.Student", "Student")

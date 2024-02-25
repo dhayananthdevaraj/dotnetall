@@ -67,7 +67,24 @@ namespace dotnetapp.Data
         .HasForeignKey(p => p.AdmissionID)
         .OnDelete(DeleteBehavior.Cascade);
 
+        // Modify the foreign key constraint for CourseID in the Payments table
+        modelBuilder.Entity<Payment>()
+            .HasOne(p => p.Course)
+            .WithMany(c => c.Payments)
+            .HasForeignKey(p => p.CourseID)
+            .OnDelete(DeleteBehavior.NoAction);
+
+// Modify the foreign key constraint for AdmissionID in the Payments table
+        modelBuilder.Entity<Payment>()
+            .HasOne(p => p.Admission)
+            .WithMany(a => a.Payments)
+            .HasForeignKey(p => p.AdmissionID)
+            .OnDelete(DeleteBehavior.NoAction);
+
+
     base.OnModelCreating(modelBuilder);
+
+    
 }
 
     }
