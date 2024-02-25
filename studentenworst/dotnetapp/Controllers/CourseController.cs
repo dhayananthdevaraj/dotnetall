@@ -77,7 +77,7 @@ namespace dotnetapp.Controllers
         }
 
         // [Authorize(Roles = "Admin")]
-        [HttpPut("{courseId}")]
+        [HttpPut("api/course{courseId}")]
         public async Task<ActionResult> UpdateCourse(int courseId, [FromBody] Course updatedCourse)
         {
             try
