@@ -18,9 +18,9 @@ namespace dotnetapp.Models
         public int AdmissionID { get; set; }
 
         // Navigation properties
-        public Student Student { get; set; }
+        public Student? Student { get; set; }
       
-        public Admission Admission { get; set; }
+        public Admission? Admission { get; set; }
 
         // Add any additional properties specific to payments
     }
