@@ -43,51 +43,67 @@ namespace dotnetapp.Controllers
             }
         }
  
-        [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Register(RegistrationModel model)
+       [HttpPost]
+[Route("register")]
+public async Task<IActionResult> Register(RegistrationModel model)
+{
+    try
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(new { Status = "Error", Message = "Invalid Payload" });
+
+        Console.WriteLine("model", model);
+
+        if (model.UserRole == "Admin" || model.UserRole == "Operator" || model.UserRole == "Student")
         {
-            try
+            var (status, message) = await _authService.Registeration(model, model.UserRole);
+            if (status == 0)
             {
- 
-                if (!ModelState.IsValid)
-                    return BadRequest(new { Status = "Error", Message = "Invalid Payload" });
-                    Console.WriteLine("model",model);
-                if (model.UserRole == "Admin" || model.UserRole == "Operator")
-                {
-                    var (status, message) = await _authService.Registeration(model, model.UserRole);
-                    if (status == 0)
-                    {
-                        return BadRequest(new { Status = "Error", Message = message });
-                    }
-                    var user = new User
-                    {
-                        Username = model.Username,
-                        Password = model.Password,
-                        Email = model.Email,
-                        MobileNumber = model.MobileNumber,
-                        UserRole = model.UserRole,
-                    };
-                    _context.Users.Add(user);
-                    await _context.SaveChangesAsync();
-                    //return CreatedAtAction(nameof(Register), model);
-                    return Ok(new { Status = "Success", Message = message });
-                }
-                else
-                {
-                    return BadRequest(new { Status = "Error", Message = "Invalid user role" });
-                }
- 
+                return BadRequest(new { Status = "Error", Message = message });
             }
-            catch (Exception ex)
+
+            var user = new User
             {
-                _logger.LogError(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                Username = model.Username,
+                Password = model.Password,
+                Email = model.Email,
+                MobileNumber = model.MobileNumber,
+                UserRole = model.UserRole,
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            if (model.UserRole == "Student")
+            {
+                var student = new Student
+                {
+                    StudentName = model.Username,
+                    StudentEmailId = model.Email,
+                    UserId = user.UserId,
+                };
+
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
             }
+
+            return Ok(new { Status = "Success", Message = message });
+        }
+        else
+        {
+            return BadRequest(new { Status = "Error", Message = "Invalid user role" });
         }
 
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex.Message);
+        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+    }
+}
 
-        [Authorize]
+
+       
         [HttpGet]
         [Route("users")]
         public IActionResult GetAllUsers()
