@@ -18,10 +18,10 @@ namespace dotnetapp.Models
 
         // Navigation property
         [JsonIgnore]
-        public Student Student { get; set; }
+        public Student? Student { get; set; }
 
           [JsonIgnore]
-         public Course Course { get; set; }
+         public Course? Course { get; set; }
 
     }
 }
