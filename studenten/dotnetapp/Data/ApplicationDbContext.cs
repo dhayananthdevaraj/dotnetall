@@ -55,11 +55,11 @@ namespace dotnetapp.Data
         .HasForeignKey(a => a.CourseID)
         .OnDelete(DeleteBehavior.Cascade);
 
-    modelBuilder.Entity<Course>()
-        .HasMany(c => c.Payments)
-        .WithOne(p => p.Course)
-        .HasForeignKey(p => p.CourseID)
-        .OnDelete(DeleteBehavior.Cascade);
+    // modelBuilder.Entity<Course>()
+    //     .HasMany(c => c.Payments)
+    //     .WithOne(p => p.Course)
+    //     .HasForeignKey(p => p.CourseID)
+    //     .OnDelete(DeleteBehavior.Cascade);
 
     modelBuilder.Entity<Admission>()
         .HasMany(a => a.Payments)
