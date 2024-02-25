@@ -16,7 +16,7 @@ public class Admission
     public Course Course { get; set; }
 
     // Navigation property for a single Payment
-    public Payment Payment { get; set; }
+    public ICollection<Payment> Payments { get; set; }
 
     // Add any additional properties specific to admissions
 }

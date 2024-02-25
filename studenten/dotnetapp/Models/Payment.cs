@@ -8,6 +8,10 @@ namespace dotnetapp.Models
         public DateTime PaymentDate { get; set; }
         public int Amount { get; set; }
 
+        public string PaymentMode { get; set; }
+
+
+
         // Foreign keys
         public int StudentId { get; set; }
         public int CourseID { get; set; }
