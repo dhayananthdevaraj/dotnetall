@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetapp.Controllers
 {
-    [Route("api/enquiry")]
+    // [Route("api/enquiry")]
     [ApiController]
     // [Authorize(Roles = "Admin, OfficeStaff")] // Adjust authorization based on your requirements
     public class EnquiryController : ControllerBase
@@ -20,7 +20,13 @@ namespace dotnetapp.Controllers
             _enquiryService = enquiryService;
         }
 
-        [HttpGet]
+        //  [HttpPost("api/student/addenquiry")]
+        // public IActionResult Swagger3()
+        // {
+        //     return Ok();
+        // }
+
+        [HttpGet("api/enquiry")]
         public async Task<ActionResult<IEnumerable<Enquiry>>> GetAllEnquiries()
         {
             try
@@ -34,7 +40,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("api/enquiry/{id}")]
         public async Task<ActionResult<Enquiry>> GetEnquiryById(int id)
         {
             try
@@ -54,7 +60,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("api/student/addenquiry")]
         public async Task<ActionResult> AddEnquiry([FromBody] Enquiry newEnquiry)
         {
             try
@@ -68,7 +74,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/enquiry/{id}")]
         public async Task<ActionResult> UpdateEnquiry(int id, [FromBody] Enquiry updatedEnquiry)
         {
             try
@@ -86,7 +92,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/enquiry/{id}")]
         public async Task<ActionResult> DeleteEnquiry(int id)
         {
             try
