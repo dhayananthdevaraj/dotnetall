@@ -10,7 +10,7 @@ namespace dotnetapp.Controllers
 {
     [Route("api/payment")]
     [ApiController]
-    [Authorize(Roles = "Admin")] // Adjust authorization based on your requirements
+    // [Authorize(Roles = "Admin")] // Adjust authorization based on your requirements
     public class PaymentController : ControllerBase
     {
         private readonly PaymentService _paymentService;

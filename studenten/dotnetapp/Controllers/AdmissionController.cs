@@ -10,7 +10,7 @@ namespace dotnetapp.Controllers
 {
     [Route("api/admission")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public class AdmissionController : ControllerBase
     {
         private readonly AdmissionService _admissionService;

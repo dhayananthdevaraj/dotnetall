@@ -1,4 +1,6 @@
 // Admission model
+
+namespace dotnetapp.Models{
 public class Admission
 {
     public int AdmissionID { get; set; }
@@ -16,4 +18,5 @@ public class Admission
     public Payment Payment { get; set; }
 
     // Add any additional properties specific to admissions
+}
 }

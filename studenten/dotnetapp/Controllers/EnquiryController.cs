@@ -10,7 +10,7 @@ namespace dotnetapp.Controllers
 {
     [Route("api/enquiry")]
     [ApiController]
-    [Authorize(Roles = "Admin, OfficeStaff")] // Adjust authorization based on your requirements
+    // [Authorize(Roles = "Admin, OfficeStaff")] // Adjust authorization based on your requirements
     public class EnquiryController : ControllerBase
     {
         private readonly EnquiryService _enquiryService;
