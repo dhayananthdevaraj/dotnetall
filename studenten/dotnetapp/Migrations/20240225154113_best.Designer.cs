@@ -12,8 +12,8 @@ using dotnetapp.Data;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240225151854_intial")]
-    partial class intial
+    [Migration("20240225154113_best")]
+    partial class best
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
