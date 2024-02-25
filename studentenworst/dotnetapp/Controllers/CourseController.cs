@@ -33,15 +33,20 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpGet("swagger")]
+        [HttpGet("api/student/course")]
         public IActionResult Swagger()
         {
             return Ok();
         }
 
+        [HttpGet("api/student/courses")]
+        public IActionResult Swagger2()
+        {
+            return Ok();
+        }
 
 
-        [HttpGet("api/course/{courseId}")]
+        [HttpGet("api/course/{id}")]
         public async Task<ActionResult<Course>> GetCourseById(int courseId)
         {
             try
@@ -77,7 +82,7 @@ namespace dotnetapp.Controllers
         }
 
         // [Authorize(Roles = "Admin")]
-        [HttpPut("api/course{courseId}")]
+        [HttpPut("api/course/{id}")]
         public async Task<ActionResult> UpdateCourse(int courseId, [FromBody] Course updatedCourse)
         {
             try
@@ -96,7 +101,7 @@ namespace dotnetapp.Controllers
         }
 
         // [Authorize(Roles = "Admin")]
-        [HttpDelete("{courseId}")]
+        [HttpDelete("api/course/{id}")]
         public async Task<ActionResult> DeleteCourse(int courseId)
         {
             try

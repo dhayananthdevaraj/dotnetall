@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetapp.Controllers
 {
-    [Route("api/payment")]
+    // [Route("api/payment")]
     [ApiController]
     // [Authorize(Roles = "Admin")] // Adjust authorization based on your requirements
     public class PaymentController : ControllerBase
@@ -20,7 +20,7 @@ namespace dotnetapp.Controllers
             _paymentService = paymentService;
         }
 
-        [HttpGet]
+        [HttpGet("api/payments")]
         public async Task<ActionResult<IEnumerable<Payment>>> GetAllPayments()
         {
             try
@@ -34,7 +34,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpGet("{paymentId}")]
+        [HttpGet("api/payments/{id}")]
         public async Task<ActionResult<Payment>> GetPaymentById(int paymentId)
         {
             try
@@ -54,7 +54,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("api/student/make-payment")]
         public async Task<ActionResult> AddPayment([FromBody] Payment newPayment)
         {
             try

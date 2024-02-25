@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetapp.Controllers
 {
-    [Route("api/admission")]
+    // [Route("api/admission")]
     [ApiController]
     // [Authorize(Roles = "Admin")]
     public class AdmissionController : ControllerBase
@@ -20,7 +20,7 @@ namespace dotnetapp.Controllers
             _admissionService = admissionService;
         }
 
-        [HttpGet]
+        [HttpGet("api/admissions")]
         public async Task<ActionResult<IEnumerable<Admission>>> GetAllAdmissions()
         {
             try
@@ -34,7 +34,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("api/admission/{admissionId}")]
         public async Task<ActionResult<Admission>> GetAdmissionById(int id)
         {
             try
@@ -54,7 +54,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("api/admissions")]
         public async Task<ActionResult> AddAdmission([FromBody] Admission newAdmission)
         {
             try
@@ -68,7 +68,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpPut("updateadmission/{id}")]
+        [HttpPut("api/updateadmission/{admissionId}")]
         public async Task<ActionResult> UpdateAdmission(int id, [FromBody] Admission updatedAdmission)
         {
             try
@@ -86,7 +86,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/admission/{admissionId}")]
         public async Task<ActionResult> DeleteAdmission(int id)
         {
             try
