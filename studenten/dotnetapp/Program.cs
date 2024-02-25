@@ -37,8 +37,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 // Adding Authentication  
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<AdmissionService>();
-builder.Services.AddScoped<ContainerService>();
-builder.Services.AddScoped<IssueService>();
+builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<EnquiryService>();
+builder.Services.AddScoped<PaymentService>();
 
 builder.Services.AddAuthentication(options =>
 {

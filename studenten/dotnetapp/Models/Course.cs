@@ -12,6 +12,8 @@ namespace dotnetapp.Models
         public string Duration { get; set; }
         public int FeesAmount { get; set; }
 
+        
+
         [JsonIgnore]
         public ICollection<Student> Students { get; set; }
 

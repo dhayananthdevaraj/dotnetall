@@ -14,8 +14,14 @@ namespace dotnetapp.Models
         // Foreign key
         public int StudentId { get; set; }
 
+         public int CourseID { get; set; }
+
         // Navigation property
         [JsonIgnore]
         public Student Student { get; set; }
+
+          [JsonIgnore]
+         public Course Course { get; set; }
+
     }
 }
