@@ -15,16 +15,16 @@ namespace dotnetapp.Models
         
 
         [JsonIgnore]
-        public ICollection<Student> Students { get; set; }
+        public ICollection<Student>? Students { get; set; }
 
         [JsonIgnore]
-        public ICollection<Enquiry> Enquiries { get; set; }
+        public ICollection<Enquiry>? Enquiries { get; set; }
 
         [JsonIgnore]
-        public ICollection<Admission> Admissions { get; set; }
+        public ICollection<Admission>? Admissions { get; set; }
 
         [JsonIgnore]
-        public ICollection<Payment> Payments { get; set; }
+        public ICollection<Payment>? Payments { get; set; }
 
     }
 }

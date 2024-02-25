@@ -53,7 +53,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult> AddCourse([FromBody] Course newCourse)
         {
@@ -68,7 +68,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpPut("{courseId}")]
         public async Task<ActionResult> UpdateCourse(int courseId, [FromBody] Course updatedCourse)
         {
@@ -87,7 +87,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpDelete("{courseId}")]
         public async Task<ActionResult> DeleteCourse(int courseId)
         {
