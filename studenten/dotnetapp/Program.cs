@@ -36,7 +36,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 // Adding Authentication  
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<AssignmentService>();
+builder.Services.AddScoped<AdmissionService>();
 builder.Services.AddScoped<ContainerService>();
 builder.Services.AddScoped<IssueService>();
 
