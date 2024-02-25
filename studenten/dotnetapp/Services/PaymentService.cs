@@ -20,6 +20,7 @@ namespace dotnetapp.Services
         {
             return await _context.Payments
                 .Include(p => p.Student)
+                .Include(p => p.Admission)
                 .ToListAsync();
         }
 
@@ -27,6 +28,7 @@ namespace dotnetapp.Services
         {
             return await _context.Payments
                 .Include(p => p.Student)
+                .Include(p => p.Admission)
                 .FirstOrDefaultAsync(p => p.PaymentID == paymentId);
         }
 
