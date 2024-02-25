@@ -32,7 +32,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpGet("{studentId}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudentById(int studentId)
         {
             try
@@ -52,7 +52,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-         [HttpGet("UserID/{userID}")]
+         [HttpGet("UserId/{userId}")]
     public async Task<ActionResult<Student>> GetStudentByUserId(long userID)
     {
         try
@@ -86,7 +86,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpPut("{studentId}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateStudent(int studentId, [FromBody] Student updatedStudent)
         {
             try
@@ -104,7 +104,7 @@ namespace dotnetapp.Controllers
             }
         }
 
-        [HttpDelete("{studentId}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteStudent(int studentId)
         {
             try
