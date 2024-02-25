@@ -16,19 +16,21 @@ namespace dotnetapp.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Enquiry>> GetAllEnquiries()
-        {
-            return await _context.Enquiries
-                .Include(e => e.Student)
-                .ToListAsync();
-        }
+     public async Task<IEnumerable<Enquiry>> GetAllEnquiries()
+{
+    return await _context.Enquiries
+        .Include(e => e.Student)
+        .Include(e => e.Course)
+        .ToListAsync();
+}
 
-        public async Task<Enquiry> GetEnquiryById(int id)
-        {
-            return await _context.Enquiries
-                .Include(e => e.Student)
-                .FirstOrDefaultAsync(e => e.EnquiryID == id);
-        }
+      public async Task<Enquiry> GetEnquiryById(int id)
+{
+    return await _context.Enquiries
+        .Include(e => e.Student)
+        .Include(e => e.Course)
+        .FirstOrDefaultAsync(e => e.EnquiryID == id);
+}
 
         public async Task<Enquiry> AddEnquiry(Enquiry newEnquiry)
         {
