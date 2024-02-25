@@ -40,6 +40,7 @@ builder.Services.AddScoped<AdmissionService>();
 builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<EnquiryService>();
 builder.Services.AddScoped<PaymentService>();
+builder.Services.AddScoped<StudentService>();
 
 builder.Services.AddAuthentication(options =>
 {
