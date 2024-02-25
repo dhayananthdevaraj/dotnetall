@@ -62,7 +62,8 @@ namespace dotnetapp.Migrations
 
                     b.HasIndex("CourseID");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentId", "CourseID")
+                        .IsUnique();
 
                     b.ToTable("Admissions");
                 });
@@ -221,7 +222,7 @@ namespace dotnetapp.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseID")
+                    b.Property<int?>("CourseID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PaymentDate")
@@ -506,11 +507,9 @@ namespace dotnetapp.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("dotnetapp.Models.Course", "Course")
+                    b.HasOne("dotnetapp.Models.Course", null)
                         .WithMany("Payments")
-                        .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("CourseID");
 
                     b.HasOne("dotnetapp.Models.Student", "Student")
                         .WithMany()
@@ -519,8 +518,6 @@ namespace dotnetapp.Migrations
                         .IsRequired();
 
                     b.Navigation("Admission");
-
-                    b.Navigation("Course");
 
                     b.Navigation("Student");
                 });

@@ -307,8 +307,8 @@ namespace dotnetapp.Migrations
                     Amount = table.Column<int>(type: "int", nullable: false),
                     PaymentMode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
-                    CourseID = table.Column<int>(type: "int", nullable: false),
-                    AdmissionID = table.Column<int>(type: "int", nullable: false)
+                    AdmissionID = table.Column<int>(type: "int", nullable: false),
+                    CourseID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -337,9 +337,10 @@ namespace dotnetapp.Migrations
                 column: "CourseID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admissions_StudentId",
+                name: "IX_Admissions_StudentId_CourseID",
                 table: "Admissions",
-                column: "StudentId");
+                columns: new[] { "StudentId", "CourseID" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
